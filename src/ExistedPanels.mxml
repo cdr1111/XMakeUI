@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="338" height="300" creationComplete="onComplete(event)" alpha="1" contentBackgroundAlpha="1.0">
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	<fx:Metadata>
+		[Event(name="selectedFile", type="flash.events.Event")]
+		[Event(name="onClose", type="flash.events.Event")]
+	</fx:Metadata>
+	<fx:Script>
+		<![CDATA[
+			import fl.events.ListEvent;
+			
+			import mx.collections.ArrayList;
+			import mx.collections.IList;
+			
+			import spark.events.IndexChangeEvent;
+			import spark.events.TextOperationEvent;
+
+			private var _selectedFl:File;
+			
+			private var _vo:IList;
+			
+			public function get selectedFl():File
+			{
+				return _selectedFl;
+			}
+
+			public function set dataProvider(value:IList):void
+			{
+				this._vo = value;
+				this.fillData();
+				this.addEventListener(KeyboardEvent.KEY_DOWN,keyDownEvent);
+			}
+			
+			private function onComplete(e:Event):void
+			{
+				this.fillData();
+			}
+
+			private function fillData():void
+			{
+				if(this.initialized && this.lstPanel.dataProvider == null)
+				{
+					this.lstPanel.dataProvider = _vo;
+					this.lstPanel.labelField = "label";
+				}
+			}
+			
+			public function filterStr(value:String):void
+			{
+				var arr:ArrayList;
+				if(value == "" || value == null)
+				{
+					arr = new ArrayList(_vo.toArray());
+					return;
+				}
+				else
+				{
+					arr = new ArrayList();
+				}
+				var reg:RegExp = new RegExp(value,"xi");
+				for(var i:int=0;i<_vo.length;i++)
+				{
+					var str:String = _vo.getItemAt(i)[this.lstPanel.labelField] as String;
+					if(str.match(reg))
+					{
+						arr.addItem(_vo.getItemAt(i));
+					}
+				}
+				
+				this.lstPanel.dataProvider = arr;
+				if(arr.length == 1)
+				{
+					this.lstPanel.selectedIndex = 0;
+					
+				}
+			}
+			
+			protected function btnOK_clickHandler(event:MouseEvent=null):void
+			{
+				this.removeEventListener(KeyboardEvent.KEY_DOWN,keyDownEvent);
+				this._selectedFl = this.lstPanel.selectedItem.file;	
+				this.dispatchEvent(new Event("selectedFile"));
+			}
+
+			protected function lstPanel_doubleClickHandler(event:MouseEvent):void
+			{
+				this._selectedFl = this.lstPanel.selectedItem.file;	
+				this.dispatchEvent(new Event("selectedFile"));
+			}
+			
+			protected function text_changeHandler(event:TextOperationEvent):void
+			{
+				filterStr(text.text);
+			}
+			
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				this.removeEventListener(KeyboardEvent.KEY_DOWN,keyDownEvent);
+				this.dispatchEvent(new Event("onClose"));
+			}
+			
+			protected function keyDownEvent(event:KeyboardEvent):void
+			{
+				if(event.keyCode == Keyboard.ENTER && this.lstPanel.selectedItem != null)
+				{
+					btnOK_clickHandler();
+				}
+				if(event.keyCode == Keyboard.DOWN)
+				{
+					if(this.lstPanel.selectedIndex == this.lstPanel.dataProvider.length - 1)
+					{
+						this.lstPanel.selectedIndex = 0;
+					}
+					else
+					{
+						this.lstPanel.selectedIndex ++;
+					}
+				}
+				else if(event.keyCode == Keyboard.UP)
+				{
+					if(this.lstPanel.selectedIndex <= 0)
+					{
+						this.lstPanel.selectedIndex = this.lstPanel.dataProvider.length - 1
+					}
+					else
+					{
+						this.lstPanel.selectedIndex--
+					}
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<s:Label x="223" y="184" text="还可以双击选中的文件" visible="false"/>
+	<s:BorderContainer x="0" y="-1" width="338" height="301" backgroundColor="#FEF9C0">
+		<s:List x="6" y="7" doubleClickEnabled="true" doubleClick="lstPanel_doubleClickHandler(event)" width="181" height="271" id="lstPanel"></s:List>
+		<s:Button id="btnOK" x="210" y="249" width="62" height="26" label="打开"
+				  click="btnOK_clickHandler(event)"/>
+		<s:TextInput id="text" x="195" y="204" width="137" change="text_changeHandler(event)"/>
+		<s:Label x="195" y="169" width="119" text="你可以输入一个正则表达式进行快速筛选"/>
+		<s:Button x="272" y="249" width="62" height="26" label="关闭" click="button1_clickHandler(event)"/>
+	</s:BorderContainer>
+</s:Group>

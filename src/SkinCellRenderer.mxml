@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				autoDrawBackground="true"
+				width="200"
+				height="230"
+				click="onClick(event)">
+	<s:states>
+		<s:State name="normal" />
+		<s:State name="hovered" />
+		<s:State name="selected" />
+		<s:State name="normalAndShowsCaret" />
+		<s:State name="hoveredAndShowsCaret" />
+		<s:State name="selectedAndShowsCaret" />
+	</s:states>
+	<fx:Declarations>
+	</fx:Declarations>
+	<fx:Metadata>
+		[Event(name="select", type="flash.events.Event")]
+	</fx:Metadata>
+	<s:SpriteVisualElement id="container" />
+	<s:Label y="210"
+			 includeIn="normal"
+			 width="100%"
+			 text="{labelName}"
+			 textAlign="center"/>
+	<!--<s:Group y="210"
+			 includeIn="hovered, selected, hoveredAndShowsCaret, selectedAndShowsCaret">
+		<s:Button label="选中"
+				  click="onClick(event)"/>
+	</s:Group>-->
+	<fx:Script>
+		<![CDATA[
+			import com.structurals.SkinStructural;
+			[Bindable]
+			private var labelName:String;
+			
+			override public function set data(value:Object):void
+			{
+				super.data = value;
+				var s:SkinStructural = value as SkinStructural;
+				labelName = s.skinName;
+				var w:Number = 200;
+				var h:Number = 200;
+				
+				var dis:DisplayObject = s.create();
+				var pw:Number = w / dis.width;
+				var ph:Number = h / dis.height;
+				var scale:Number = Math.min(pw, ph, 1);
+				dis.scaleX = dis.scaleY = scale;
+				dis.x = (w - dis.width) / 2 >> 0;
+				dis.y = (h - dis.height) / 2 >> 0;
+				container.addChild(dis);
+			}
+			
+			protected function onClick(event:MouseEvent):void
+			{
+				dispatchEvent(new Event(Event.SELECT));
+			}
+			
+		]]>
+	</fx:Script>
+</s:ItemRenderer>

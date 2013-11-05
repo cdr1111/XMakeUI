@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="400" height="300" title="设置样式" fontSize="12" creationComplete="init()">
+	<mx:Text x="59" y="10" width="299" id="styleName"/>
+	<mx:Label x="10" y="10" text="样式名"/>
+	<mx:Label x="10" y="60" text="类型" width="41"/>
+	<mx:Button x="318" y="224" label="确定" id="okBtn"/>
+	<mx:Label x="19" y="145" text="值"/>
+	<mx:TextInput x="59" y="143" id="valueTxt"/>	
+	<mx:Label x="59" y="60" text="标签" width="146" id="typeLabel"/>
+</mx:Panel>

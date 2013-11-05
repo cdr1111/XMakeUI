@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding ="utf-8"?>
+<swc xmlns="http://www.adobe.com/flash/swccatalog/9">
+  <versions>
+    <swc version="1.2" />
+    <flash version="10.0" build="d544" platform="WIN" />
+  </versions>
+  <features>
+    <feature-script-deps />
+    <feature-files />
+  </features>
+  <libraries>
+    <library path="library.swf">
+      <script name="AddPointBtn_disableSkin" mod="1332231729765" >
+        <def id="AddPointBtn_disableSkin" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="AddPointBtn_downSkin" mod="1332231729765" >
+        <def id="AddPointBtn_downSkin" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="AddPointBtn_overSkin" mod="1332231729781" >
+        <def id="AddPointBtn_overSkin" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="AddPointBtn_upSkin" mod="1332231729781" >
+        <def id="AddPointBtn_upSkin" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="CheckBox_OFF" mod="1332231729781" >
+        <def id="CheckBox_OFF" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="CheckBox_ON" mod="1332231729781" >
+        <def id="CheckBox_ON" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="CloseBtn_DisableSkin" mod="1332231729781" >
+        <def id="CloseBtn_DisableSkin" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="CloseBtn_DownSkin" mod="1332231729781" >
+        <def id="CloseBtn_DownSkin" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="CloseBtn_OverSkin" mod="1332231729781" >
+        <def id="CloseBtn_OverSkin" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="CloseBtn_UpSkin" mod="1332231729781" >
+        <def id="CloseBtn_UpSkin" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="Dark_qualityStar" mod="1332231729781" >
+        <def id="Dark_qualityStar" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="Light_qualityStar" mod="1332231729781" >
+        <def id="Light_qualityStar" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="LongBtn_DisableSkin" mod="1332231729781" >
+        <def id="LongBtn_DisableSkin" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="LongBtn_DownSkin" mod="1332231729781" >
+        <def id="LongBtn_DownSkin" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="LongBtn_NormalSkin" mod="1332231729781" >
+        <def id="LongBtn_NormalSkin" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="LongBtn_OverSkin" mod="1332231729781" >
+        <def id="LongBtn_OverSkin" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="PackCell_bgSkin" mod="1332231729781" >
+        <def id="PackCell_bgSkin" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="PageNextBtn_DisableSkin" mod="1332231729781" >
+        <def id="PageNextBtn_DisableSkin" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="PageNextBtn_DownSkin" mod="1332231729781" >
+        <def id="PageNextBtn_DownSkin" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="PageNextBtn_OverSkin" mod="1332231729781" >
+        <def id="PageNextBtn_OverSkin" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="PageNextBtn_UpSkin" mod="1332231729781" >
+        <def id="PageNextBtn_UpSkin" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="PagePreBtn_DisableSkin" mod="1332231729781" >
+        <def id="PagePreBtn_DisableSkin" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="PagePreBtn_DownSkin" mod="1332231729781" >
+        <def id="PagePreBtn_DownSkin" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="PagePreBtn_OverSkin" mod="1332231729781" >
+        <def id="PagePreBtn_OverSkin" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="PagePreBtn_UpSkin" mod="1332231729781" >
+        <def id="PagePreBtn_UpSkin" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="RES_transform" mod="1332231729781" >
+        <def id="RES_transform" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="ShortBtn_DisableSkin" mod="1332231729781" >
+        <def id="ShortBtn_DisableSkin" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="ShortBtn_DownSkin" mod="1332231729781" >
+        <def id="ShortBtn_DownSkin" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="ShortBtn_NormalSkin" mod="1332231729781" >
+        <def id="ShortBtn_NormalSkin" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="ShortBtn_OverSkin" mod="1332231729781" >
+        <def id="ShortBtn_OverSkin" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="TransparenceDarkBg" mod="1332231729781" >
+        <def id="TransparenceDarkBg" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="TransparenceFrameBg" mod="1332231729781" >
+        <def id="TransparenceFrameBg" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="TransparenceTingeBg" mod="1332231729781" >
+        <def id="TransparenceTingeBg" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="background3_shi" mod="1332231729781" >
+        <def id="background3_shi" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="bg_bdbz" mod="1332231729781" >
+        <def id="bg_bdbz" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="bg_choose_over" mod="1332231729781" >
+        <def id="bg_choose_over" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="bg_common" mod="1332231729781" >
+        <def id="bg_common" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="bg_grey" mod="1332231729781" >
+        <def id="bg_grey" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="bg_import" mod="1332231729781" >
+        <def id="bg_import" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="bg_inner" mod="1332231729781" >
+        <def id="bg_inner" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="bg_input" mod="1332231729781" >
+        <def id="bg_input" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="bg_jbsx_bottomborder" mod="1332231729781" >
+        <def id="bg_jbsx_bottomborder" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="bg_jbsx_corner_down" mod="1332231729781" >
+        <def id="bg_jbsx_corner_down" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="bg_jbsx_corner_on" mod="1332231729781" >
+        <def id="bg_jbsx_corner_on" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="bg_jbsx_line_big" mod="1332231729781" >
+        <def id="bg_jbsx_line_big" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="bg_jbsx_titlebar" mod="1332231729781" >
+        <def id="bg_jbsx_titlebar" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="bg_kuang_s" mod="1332231729781" >
+        <def id="bg_kuang_s" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="bg_list_gold_frame" mod="1332231729781" >
+        <def id="bg_list_gold_frame" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="bg_listover" mod="1332231729781" >
+        <def id="bg_listover" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="bg_progress" mod="1332231729781" >
+        <def id="bg_progress" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="bg_progress_blue" mod="1332231729781" >
+        <def id="bg_progress_blue" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="bg_progress_green" mod="1332231729781" >
+        <def id="bg_progress_green" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="bg_progress_red" mod="1332231729781" >
+        <def id="bg_progress_red" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="bg_progress_yellow" mod="1332231729781" >
+        <def id="bg_progress_yellow" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="bg_prompt_xinxikuang" mod="1332231729781" >
+        <def id="bg_prompt_xinxikuang" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="bg_resource_3" mod="1332231729781" >
+        <def id="bg_resource_3" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="bg_xthj_tanchuang" mod="1332231729781" >
+        <def id="bg_xthj_tanchuang" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="bg_xthj_xingji_jdt" mod="1332231729781" >
+        <def id="bg_xthj_xingji_jdt" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="bg_zhandoujieguo_kuang" mod="1332231729781" >
+        <def id="bg_zhandoujieguo_kuang" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="border_guojia" mod="1332231729781" >
+        <def id="border_guojia" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="border_newbie" mod="1332231729781" >
+        <def id="border_newbie" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="btn_jbsx_close_down" mod="1332231729781" >
+        <def id="btn_jbsx_close_down" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="btn_jbsx_close_over" mod="1332231729781" >
+        <def id="btn_jbsx_close_over" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="btn_jbsx_close_up" mod="1332231729781" >
+        <def id="btn_jbsx_close_up" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="btn_main_menu" mod="1332231729781" >
+        <def id="btn_main_menu" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="btn_sliderDown_disable" mod="1332231729781" >
+        <def id="btn_sliderDown_disable" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="btn_sliderDown_down" mod="1332231729781" >
+        <def id="btn_sliderDown_down" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="btn_sliderDown_over" mod="1332231729781" >
+        <def id="btn_sliderDown_over" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="btn_sliderDown_up" mod="1332231729781" >
+        <def id="btn_sliderDown_up" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="btn_sliderUp_disable" mod="1332231729781" >
+        <def id="btn_sliderUp_disable" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="btn_sliderUp_down" mod="1332231729781" >
+        <def id="btn_sliderUp_down" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="btn_sliderUp_over" mod="1332231729781" >
+        <def id="btn_sliderUp_over" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="btn_sliderUp_up" mod="1332231729781" >
+        <def id="btn_sliderUp_up" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="btn_slider_bg" mod="1332231729781" >
+        <def id="btn_slider_bg" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="btn_slidermid_down" mod="1332231729781" >
+        <def id="btn_slidermid_down" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="btn_slidermid_over" mod="1332231729781" >
+        <def id="btn_slidermid_over" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="btn_slidermid_up" mod="1332231729781" >
+        <def id="btn_slidermid_up" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="comBoBoxSkin_Down" mod="1332231729781" >
+        <def id="comBoBoxSkin_Down" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="comBoBoxSkin_Over" mod="1332231729781" >
+        <def id="comBoBoxSkin_Over" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="comBoBoxSkin_Up" mod="1332231729781" >
+        <def id="comBoBoxSkin_Up" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="comboBoxBg" mod="1332231729781" >
+        <def id="comboBoxBg" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="double_frame" mod="1332231729781" >
+        <def id="double_frame" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="down_arrow_disabled" mod="1332231729781" >
+        <def id="down_arrow_disabled" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="down_arrow_down" mod="1332231729781" >
+        <def id="down_arrow_down" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="down_arrow_over" mod="1332231729781" >
+        <def id="down_arrow_over" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="down_arrow_up" mod="1332231729781" >
+        <def id="down_arrow_up" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="glow_inner" mod="1332231729781" >
+        <def id="glow_inner" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="grid_cell_bg" mod="1332231729781" >
+        <def id="grid_cell_bg" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="littleBlank" mod="1332231729781" >
+        <def id="littleBlank" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="map_bg" mod="1332231729781" >
+        <def id="map_bg" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="progress_bar" mod="1332231729781" >
+        <def id="progress_bar" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="rivet" mod="1332231729781" >
+        <def id="rivet" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="scrollPaneListBg" mod="1332231729781" >
+        <def id="scrollPaneListBg" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="scroll_track_bg" mod="1332231729781" >
+        <def id="scroll_track_bg" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="srollPane_downBg" mod="1332231729781" >
+        <def id="srollPane_downBg" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="srollPane_upBg" mod="1332231729781" >
+        <def id="srollPane_upBg" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="subTitleBg" mod="1332231729781" >
+        <def id="subTitleBg" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="thumb_disabled" mod="1332231729781" >
+        <def id="thumb_disabled" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="thumb_down" mod="1332231729781" >
+        <def id="thumb_down" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="thumb_over" mod="1332231729781" >
+        <def id="thumb_over" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="thumb_up" mod="1332231729781" >
+        <def id="thumb_up" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="up_arrow_disabled" mod="1332231729781" >
+        <def id="up_arrow_disabled" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="up_arrow_down" mod="1332231729781" >
+        <def id="up_arrow_down" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="up_arrow_over" mod="1332231729781" >
+        <def id="up_arrow_over" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="up_arrow_up" mod="1332231729781" >
+        <def id="up_arrow_up" /> 
+        <dep id="flash.display:MovieClip" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+    </library>
+  </libraries>
+  <files>
+  </files>
+</swc>

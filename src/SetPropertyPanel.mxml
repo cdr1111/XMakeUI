@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		   xmlns:s="library://ns.adobe.com/flex/spark" 
+		   xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.events.UIEvent;
+			import com.models.UIInstanceInfo;
+			import com.models.UIParser;
+			import com.structurals.AttributeStructural;
+			import com.structurals.UIStructural;
+			import com.tools.TypeConversion;
+			import com.undo.AttributeChangeOperation;
+			import com.undo.UIUndoManager;
+			
+			import spark.components.Label;
+			[Bindable]
+			public var uiInstance:UIInstanceInfo;
+			public var undoManager:UIUndoManager;
+			
+			public function setUIInstance(instance:UIInstanceInfo):void
+			{
+				if (uiInstance != instance)
+				{
+					this.removeAllChildren();
+					uiInstance = instance;
+					if (instance)
+					{
+						var ui:UIStructural = UIParser.Instance.parseUIByCodeXML(instance.infoXML);
+						var attList:Array = ui.attribute;
+						var att:AttributeStructural;
+						var lblClass:Label = new Label();
+						lblClass.text = uiInstance.fullName;
+						this.addChild(lblClass);
+						for each(att in attList)
+						{
+							var pi:PropertyInput = new PropertyInput;
+							pi.addEventListener(UIEvent.ATTRIBUTE_CHANGE, onAttributeChange);
+							pi.setData(att);
+							addChild(pi);
+						}
+					}
+				}
+			}
+
+			private function onAttributeChange(event:UIEvent):void
+			{
+				var oldValue:Object = uiInstance.getAttributeValue(event.changeAttName);
+				uiInstance.displayObj[event.changeAttName] = event.changeValue;
+				undoManager.pushUndo(new AttributeChangeOperation(uiInstance, event.changeAttName, oldValue, event.changeValue));
+			}
+			
+			/**
+			 * 更新属性显示
+			 */
+			public function updateAttributeFromUI():void
+			{
+				for (var i:int = 0; i < numChildren; i++)
+				{
+					var pi:PropertyInput = getChildAt(i) as PropertyInput;
+					if(pi)
+						pi.update(uiInstance);
+				}
+			}
+			
+		]]>
+	</fx:Script>
+</mx:VBox>

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml"
+		  layout="absolute"
+		  width="542"
+		  height="430"
+		  title="设置文本样式"
+		  preinitialize="init()"
+		  creationComplete="creation()" defaultButton="{confirm}">
+	<mx:Metadata>
+		[Event(name="inputOk", type="flash.events.Event")]
+	</mx:Metadata>
+	<mx:Script>
+		<![CDATA[
+			import com.ui.UITextFieldDemo;
+			
+			import mx.events.NumericStepperEvent;
+			import mx.managers.PopUpManager;
+
+			private var txt:UITextFieldDemo = new UITextFieldDemo();
+			[Bindable]
+			private var tf:TextFormat = new TextFormat;
+			
+			[Bindable]
+			private var tf_color:Object = tf.color;
+			[Bindable]
+			private var tf_bold:Boolean = tf.bold;
+			[Bindable]
+			private var tf_align:String = tf.align;
+			[Bindable]
+			private var tf_leading:Object = tf.leading;
+			[Bindable]
+			private var tf_underline:Object = tf.underline;
+			[Bindable]
+			private var tf_letterSpacing:Object = tf.letterSpacing;
+			[Bindable]
+			private var tf_italic:Boolean = tf.italic;
+			[Bindable]
+			private var tf_size:Object = tf.size;
+			
+			private function init():void
+			{
+				setFormat(tf);
+			}
+			
+			private function creation():void
+			{
+				txt.text = "测试演示文字测试演示文字abcdefgABCDEFGabcdefgABCDEFG1234567890123456789";
+
+				this.font.dataProvider = getFont();
+				this.font.selectedIndex = _dfTf;
+				
+				this.fontPanel.addChild(txt);
+			}
+
+			private function onUpdateHandler(evt:Event):void
+			{
+				this.txt.setStyle("textFormat", getFormat());
+			}
+
+			private var _dfTf:uint = 0;
+
+			private function getFont():Array
+			{
+				var temp:Array = [];
+				var fonts:Array = Font.enumerateFonts(true);
+				var i:int = 0;
+				var len:int = fonts.length;
+				for (i = 0; i < len; i++)
+				{
+					var obj:Object = {label: (fonts[i] as Font).fontName, data: fonts[i]};
+					temp.push(obj);
+
+					if ((fonts[i] as Font).fontName == "宋体")
+					{
+						_dfTf = i;
+					}
+				}
+				return temp;
+			}
+			
+			override public function set visible(value:Boolean):void
+			{
+				super.visible = value;
+				
+			}
+			
+			public function setFormat(tff:TextFormat):void
+			{
+				tff = tff || new TextFormat;
+				
+				tff.font ||= "宋体";
+				if (tff.size == null || tff.size == 0)
+					tff.size = 12;
+				tff.align ||= TextFormatAlign.JUSTIFY;
+				
+				tf = tff;
+				this.txt.setStyle("textFormat", tf);
+			}
+
+			public function getFormat():TextFormat
+			{
+				var tf:TextFormat = new TextFormat();
+				if (align.selectedItem != null)
+					tf.align = String(align.selectedItem);
+				if (font.selectedItem != null)
+					tf.font = String(font.selectedLabel);
+				tf.bold = this.bold.selected;
+				tf.color = this.color.selectedColor;
+				tf.size = uint(this.nsSize.value);
+				tf.italic = this.italic.selected;
+				tf.leading = uint(this.leading.value);
+				tf.underline = this.underline.selected;
+				tf.letterSpacing = uint(this.letterSpacing.value);
+				return tf;
+			}
+			
+			protected function okHandle(event:MouseEvent):void
+			{
+				dispatchEvent(new Event("inputOk"));
+			}
+			
+
+			protected function nsSize_changeHandler(event:NumericStepperEvent):void
+			{
+				// TODO Auto-generated method stub
+			}
+
+		]]>
+	</mx:Script>
+	<mx:Label x="79"
+			  y="10"
+			  text="大小"/>
+	<mx:Label x="183"
+			  y="100"
+			  text="align"/>
+	<mx:Label x="266"
+			  y="130"
+			  text="字体"/>
+	<mx:Label x="183"
+			  y="164"
+			  text="行距"/>
+	<mx:Label x="183"
+			  y="192"
+			  text="字距"/>
+	<mx:Label x="39"
+			  y="42"
+			  text="颜色"/>
+	<mx:ColorPicker x="10"
+					y="39"
+					id="color"
+					selectedColor="{uint(tf_color)}"
+					change="{onUpdateHandler(event)}"/>
+	<mx:ComboBox x="10"
+				 y="128"
+				 width="248"
+				 id="font"
+				 change="{onUpdateHandler(event)}">
+	</mx:ComboBox>
+	<mx:CheckBox x="10"
+				 y="68"
+				 label="是否加粗"
+				 id="bold"
+				 selected="{tf_bold}"
+				 change="{onUpdateHandler(event)}"/>
+	<mx:ComboBox x="10"
+				 y="98"
+				 width="165"
+				 id="align"
+				 selectedIndex="2"
+				 selectedItem="{tf_align}"
+				 change="{onUpdateHandler(event)}">
+		<mx:dataProvider>
+			<mx:String>{TextFormatAlign.CENTER}</mx:String>
+			<mx:String>{TextFormatAlign.JUSTIFY}</mx:String>
+			<mx:String>{TextFormatAlign.LEFT}</mx:String>
+			<mx:String>{TextFormatAlign.RIGHT}</mx:String>
+		</mx:dataProvider>
+	</mx:ComboBox>
+	<mx:HSlider x="15"
+				y="164"
+				id="leading"
+				minimum="0"
+				maximum="100"
+				value="{Number(tf_leading)}"
+				change="{onUpdateHandler(event)}"
+				/>
+	<mx:CheckBox x="14"
+				 y="266"
+				 label="是否带下划线"
+				 id="underline"
+				 selected="{tf_underline}"
+				 change="{onUpdateHandler(event)}"/>
+	<mx:HSlider x="15"
+				y="198"
+				id="letterSpacing"
+				minimum="0"
+				maximum="100"
+				value="{Number(tf_letterSpacing)}"
+				change="{onUpdateHandler(event)}"/>
+	<mx:CheckBox x="15"
+				 y="236"
+				 label="斜体"
+				 id="italic"
+				 selected="{tf_italic}"
+				 change="{onUpdateHandler(event)}"/>
+	<mx:Button x="12"
+			   y="358"
+			   label="确定"
+			   id="confirm"
+			   click="okHandle(event)"/>
+	<mx:Panel x="262"
+			  y="180"
+			  width="250"
+			  height="200"
+			  layout="absolute"
+			  title="字体演示"
+			  fontSize="12"
+			  id="fontPanel">
+	</mx:Panel>
+	<mx:Button x="94" y="358" label="取消" click="{PopUpManager.removePopUp(this)}"/>
+	<mx:NumericStepper x="11" y="8" id="nsSize" change="onUpdateHandler(event)" minimum="1" maximum="100" value="{int(tf_size)}" width="60"/>
+
+</mx:Panel>

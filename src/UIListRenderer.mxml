@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				autoDrawBackground="true"
+			    minHeight="25"
+				initialize="init()">
+	<fx:Script>
+		<![CDATA[
+			import com.models.UIInstanceInfo;
+			
+			import mx.controls.Image;
+			private var bitmap:Bitmap = new Bitmap(new BitmapData(100, 100, true, 0x00FFFFFF));
+			private function init():void
+			{
+				var image:Image = new Image;
+				image.source = bitmap;
+				imageContainer.addElement(image);
+				addEventListener(Event.ENTER_FRAME, draw);
+			}
+			
+			protected function draw(event:Event):void
+			{
+				var instance:UIInstanceInfo = data as UIInstanceInfo;
+				if (instance != null)
+				{
+					var bmd:BitmapData = bitmap.bitmapData;
+					bmd.fillRect(bmd.rect, 0x1FFF0000);
+					
+					var target:DisplayObject = instance.displayObj;
+					var matrix:Matrix = new Matrix;
+					var scale:Number = 1;
+					if (target.width > 100 || target.height > 100)
+					{
+						var ph:Number = 100 / target.height;
+						var pw:Number = 100 / target.width;
+						scale = Math.min(ph, pw);
+					}
+					
+					matrix.scale(scale, scale);
+					var offw:int = (100 - target.width * scale) / 2;
+					var offh:int = (100 - target.height * scale) / 2;
+					matrix.translate(offw, offh);
+					bmd.draw(target, matrix);
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	<mx:HBox>
+		<s:Group id="imageContainer">
+		</s:Group>
+		<s:Label text="{data.instanceName}" verticalAlign="middle" height="100%"/>
+	</mx:HBox>
+	
+</s:ItemRenderer>

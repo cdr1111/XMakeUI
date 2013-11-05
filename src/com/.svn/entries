@@ -1,0 +1,52 @@
+10
+
+dir
+496
+svn://svnserver/JJFS/Client/tools/GUITool/src/com
+svn://svnserver/JJFS
+
+
+
+2013-08-29T02:06:32.029259Z
+489
+pangruyu
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3ac6f729-eb21-cf4e-a412-4d69ce36c74e
+
+tools
+dir
+
+models
+dir
+
+enum
+dir
+
+events
+dir
+
+main
+dir
+
+undo
+dir
+
+structurals
+dir
+
+ui
+dir
+

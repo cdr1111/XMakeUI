@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		   xmlns:s="library://ns.adobe.com/flex/spark" 
+		   xmlns:mx="library://ns.adobe.com/flex/mx"
+		   width="100%"
+		   height="100%"
+		   initialize="init()">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.main.UIMainContainer;
+			import com.undo.UIUndoManager;
+			
+			import flashx.undo.IOperation;
+			
+			import mx.events.ItemClickEvent;
+			
+			import spark.components.Label;
+			[Bindable]
+			public var undoManager:UIUndoManager;
+			private function init():void
+			{
+				MianCanvas.addChildAt(UIMainContainer.Instance,0);
+			}
+			
+			protected function onItemClick(event:ItemClickEvent):void
+			{
+				var op:IOperation;
+				switch(event.label)
+				{
+					case "重做":
+						undoManager.redo();
+						break;
+					case "撤消":
+						undoManager.undo();
+						break;
+					case "清空操作":
+						undoManager.clearAll();
+						break;
+				}
+			}
+			
+
+			protected function btnXML_clickHandler(event:MouseEvent):void
+			{
+				this.lblXML.visible = !this.lblXML.visible;
+			}
+
+		]]>
+	</fx:Script>
+	<mx:ButtonBar width="334" height="30" dataProvider="{viewStack}"
+				  itemClick="onItemClick(event)">
+	</mx:ButtonBar>
+	<mx:ViewStack id="viewStack">
+		<mx:VBox label="重做" id="redo" enabled="{undoManager.redoable}" />
+		<mx:VBox label="撤消" id="undo" enabled="{undoManager.undoable}" />
+		<mx:VBox label="清空操作" enabled="{undoManager.hasOperation}" />
+	</mx:ViewStack>
+	<mx:Canvas id="MianCanvas"
+			   y="30"
+			   width="100%"
+			   height="100%"
+			   label="视图"
+			   backgroundColor="#D0FFD0"
+			   enabled="true">
+		<s:TextArea x="0" y="0" contentBackgroundColor="#D0FFD0" width="100%" height="100%" id="lblXML" visible="false"/>
+	</mx:Canvas>
+	<s:Button x="359" y="1" label="查看XML" id="btnXML" click="btnXML_clickHandler(event)" height="29" width="77"/>
+</mx:Canvas>

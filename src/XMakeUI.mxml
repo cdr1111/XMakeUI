@@ -1,0 +1,838 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:mx="library://ns.adobe.com/flex/mx"
+					   xmlns:fx="http://ns.adobe.com/mxml/2009"
+					   xmlns:s="library://ns.adobe.com/flex/spark"
+					   applicationComplete="initApp()"
+					   width="1400"
+					   height="700"
+					   xmlns:local="*"
+					   xmlns:data="fl.data.*" title="界面拼接工具">
+	
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+		<local:CreateUIPanel id="createUIPanel"
+							 main="{this}"
+							 inputOk="onShowInputNameClickHandler(event)"/>
+		<local:TextStylePanel id="textStylePanel"
+							  inputOk="onSetDefaultFontCompleleHandler(event)"/>
+		<local:SWFSkinPanel id="swfSkinPanel"
+							close="{PopUpManager.removePopUp(swfSkinPanel)}"
+							select="onSelectSkin(event)"/>
+		<local:ExistedPanels id="_panelList"
+							 selectedFile="_panelList_selectedFileHandler(event)"
+							 onClose="_panelList_onCloseHandler(event)"/>
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.demonsters.debugger.MonsterDebugger;
+			import com.enum.SkinType;
+			import com.events.MainContainerEvent;
+			import com.events.SkinEvent;
+			import com.events.UIEvent;
+			import com.greensock.loading.LoaderMax;
+			import com.greensock.loading.SWFLoader;
+			import com.main.UIMainContainer;
+			import com.models.BuildCoder;
+			import com.models.CreateUIModel;
+			import com.models.ImportConfigs;
+			import com.models.SkinModel;
+			import com.models.UIInstanceInfo;
+			import com.models.UIModelInfo;
+			import com.models.UIParser;
+			import com.structurals.SkinStructural;
+			import com.structurals.StyleData;
+			import com.structurals.UIStructural;
+			import com.ui.UIBaseSprite;
+			import com.undo.UIUndoManager;
+			
+			import fl.controls.Button;
+			
+			import mx.collections.ArrayCollection;
+			import mx.collections.ArrayList;
+			import mx.controls.Alert;
+			import mx.events.ColorPickerEvent;
+			import mx.events.ListEvent;
+			import mx.managers.PopUpManager;
+			
+			private const configURL:String = "config/uiConfig.xml";
+			private const libraryURL:String = "config/catalog.xml";
+			private const librarySWF:String = "res/ui/library.swf";
+			private const urlSkin:String = "config/urlResource.xml";
+			
+			private var _appInited:Boolean = false;
+			
+			private var _defaultFont:TextFormat = null;
+			//libs 加载器
+			private var _dllLoader:LoaderMax;
+			//libs 加载上下文
+			private var _dllContext:LoaderContext;
+			/**
+			 * 重做和撤销管理器
+			 */
+			[Bindable]
+			public var undoManager:UIUndoManager = new UIUndoManager;
+			
+			public var mainContainer:UIMainContainer = UIMainContainer.Instance;
+			
+			/**
+			 * 点击创建新面板
+			 */
+			private var _clkNewPanel:Boolean = false;
+			
+			
+			/**
+			 * 初始化
+			 */
+			private function initApp():void
+			{
+				loadXml(configURL);
+				undoManager.main = this;
+				reset();
+				
+				this.nativeWindow.x = Capabilities.screenResolutionX / 2 - this.width / 2;
+				this.nativeWindow.y = Capabilities.screenResolutionY / 2 - this.height / 2;
+				
+				MonsterDebugger.initialize(this);
+				loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR,goUncatch);
+			}
+			
+			private function onSetDefaultFontCompleleHandler(evt:Event):void
+			{
+				if (UIMainContainer.Instance.defaultFont == null)
+				{
+					UIMainContainer.Instance.defaultFont = textStylePanel.getFormat();
+					textStylePanel.title = "设置字体";
+				}
+				else
+				{
+					UIMainContainer.Instance.defaultFont = UIMainContainer.Instance.defaultFont;
+					UIMainContainer.Instance.setTextFormat(textStylePanel.getFormat());
+				}
+				
+				PopUpManager.removePopUp(textStylePanel);
+			}
+			
+			private function onShowSetFontView(evt:Event):void
+			{
+				textStylePanel.setFormat(UIMainContainer.Instance.getLastFont());
+				PopUpManager.addPopUp(textStylePanel, this, true);
+			}
+			
+			private function loadXml(url:String):void
+			{
+				var loader:URLLoader = new URLLoader();
+				loader.load(new URLRequest(url));
+				loader.addEventListener(Event.COMPLETE, onXMLloadCompeleteHandler);
+			}
+			
+			private function onXMLloadCompeleteHandler(evt:Event):void
+			{
+				var loader:URLLoader = URLLoader(evt.target);
+				if (!this._appInited)
+				{
+					var uiConfigXML:XML = new XML(loader.data);
+					UIParser.Instance.parse(uiConfigXML);
+					var dlls:XMLList = uiConfigXML.libs.lib;
+					_dllContext = new LoaderContext(false, new ApplicationDomain(ApplicationDomain.currentDomain));
+					_dllLoader = new LoaderMax({onComplete: onDllLoadComplete});
+					for each (var dll:XML in dlls)
+					{
+						_dllLoader.append(new SWFLoader(String(dll), {context: _dllContext}));
+					}
+					_dllLoader.maxConnections = 1;
+					_dllLoader.load();
+				}
+				else if (SkinModel.Instance.skinList.length == 0)
+				{
+					//这个加载已经不需要了 以后可以把加载配置流程改下，写的比较乱
+					SkinModel.Instance.swfXMLData = loader.data;
+					loadXml(urlSkin);
+				}
+				else
+				{
+					SkinModel.Instance.urlXMLData = loader.data;
+					loadSwf(librarySWF);
+				}
+			}
+			
+			/**
+			 * 所有库加载 设置默认字体
+			 */
+			private function onDllLoadComplete(event:Event):void
+			{
+				UIModelInfo.Instance.appDomain = _dllContext.applicationDomain;
+				_appInited = true;
+				
+				var tff:TextFormat = new TextFormat();
+				tff.font = "宋体";
+				tff.size = 12;
+				tff.align = TextFormatAlign.JUSTIFY;
+				UIMainContainer.Instance.defaultFont = tff;
+				
+//				PopUpManager.addPopUp(textStylePanel,this);
+//				
+//				textStylePanel.x = 460;
+//				textStylePanel.y = 160;
+//				textStylePanel.title = "设置默认字体";
+//				textStylePanel.confirm.addEventListener(MouseEvent.CLICK, onSetDefaultFontCompleleHandler);
+				loadXml(libraryURL);
+			}
+			
+			private function loadSwf(url:String):void
+			{
+				var loader:Loader = new Loader();
+				loader.load(new URLRequest(url));
+				loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onLoadSWFCompleteHandler);
+			}
+			
+			private function onLoadSWFCompleteHandler(evt:Event):void
+			{
+				var loader:LoaderInfo = evt.target as LoaderInfo;
+				if (!_appInited)
+				{
+					UIModelInfo.Instance.appDomain = loader.applicationDomain;
+					_appInited = true;
+					loadXml(libraryURL);
+				}
+				else
+				{
+					//解析完成了
+					swfSkinPanel.skinDomain = loader.applicationDomain;
+					swfSkinPanel.model = SkinModel.Instance;
+					SkinModel.Instance.skinSwfDomain = loader.applicationDomain;
+					init();
+				}
+			}
+			
+			private function init():void
+			{
+				mainContainer.addEventListener(Event.SELECT, onShowSetFontView);
+				mainContainer.addEventListener(UIEvent.ATTRIBUTE_CHANGE, onAttributeChange);
+				mainContainer.addEventListener(MainContainerEvent.COPY_UI, onCopyUIHandler);
+				mainContainer.addEventListener(UIEvent.SELECTED_UI, onSelectedUIHandler);
+				mainContainer.addEventListener(MainContainerEvent.UPDATE_INSTANCE_LIST, onUpdateInstanceListHandler);
+				mainContainer.addEventListener(UIEvent.MAIN_MOVED, onMianMovedOverHandler);
+				mainContainer.addEventListener(SkinEvent.SELECT_SWF_SKIN, onSkinEvent);
+				
+				var uiConfigs:Array = getUIlist();
+				ImportConfigs.Instance.uiconfigs = uiConfigs;
+				this.uiList.dataProvider = uiConfigs;
+				this.uiList.doubleClickEnabled = true;
+				this.uiList.addEventListener(ListEvent.ITEM_DOUBLE_CLICK, onDoubleClickHandler);
+				
+				//addChild(OtherStyleSettingPanel.Instance);
+				//addChild(SetFontSettingPanel.Instance);
+				
+				createUIPanel.setMode(true);
+				//PopUpManager.addPopUp(createUIPanel, this);
+				createUIPanel.x = 10;
+				createUIPanel.y = 47;
+				//				PopUpManager.centerPopUp(createUIPanel);
+				//AutoUpdate.check("http://192.168.22.75/AirAutoUpdate/UILayOut/update.xml");
+			}
+			
+			private var _currentStyleData:StyleData;
+			private var _currentInstance:UIInstanceInfo;
+			
+			private var _prevURL:String;
+			private var _prevSkin:String;
+			
+			/**
+			 * 选择了皮肤
+			 */
+			private function onSelectSkin(event:Event):void
+			{
+				var skin:SkinStructural = swfSkinPanel.skinData;
+				mainContainer.changeSkin(_currentInstance, _currentStyleData, skin.skinName, SkinType.SWF_SKIN, skin.create());
+				PopUpManager.removePopUp(swfSkinPanel);
+			}
+			
+			private function onSkinEvent(event:SkinEvent):void
+			{
+				_currentStyleData = event.styleData;
+				_currentInstance = event.instance;
+				switch (event.skinType)
+				{
+					case SkinType.SWF_SKIN:
+						PopUpManager.addPopUp(swfSkinPanel, this, true);
+						PopUpManager.centerPopUp(swfSkinPanel);
+						break;
+					case SkinType.CLS_SKIN:
+						Alert.show("此皮肤只能通过SWF中使用");
+						break;
+					default:
+						getFile();
+						break;
+				}
+			}
+			private function getFile():void
+			{
+				if(_prevURL == null)
+				{
+					var f:File = new File();
+					f.addEventListener(Event.SELECT, function():void
+					{
+						loadFile(f.url);
+					});
+					f.browse();
+				}
+				else
+				{
+					loadFile(findURL());
+				}
+			}
+			private var skinObject:Object = {
+				disabled:"off|disable"
+			}
+			private function findURL():String
+			{
+				var skin:String = _currentStyleData.skinName.replace("Skin","");
+				var url:String = _prevURL.replace("{0}",skin);
+				var file:File = new File();
+				file.url = url;
+				if(file.exists) return url;
+				else
+				{
+					var arr:Array = (skinObject[skin] as String).split("|");
+					for each(var str:String in arr)
+					{
+						skin = str;
+						url = _prevURL.replace("{0}",skin);
+						file.url = url;
+						if(file.exists) return url;
+					}
+				}
+				return url;
+			}
+			
+			private function loadFile(url:String):void
+			{
+				var loader:Loader = new Loader;
+				loader.load(new URLRequest(url));
+				loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,function():void
+				{
+					if(mainContainer.next())
+					{
+						if(_prevURL == null)
+						{
+							_prevSkin = _currentStyleData.skinName.replace("Skin","");
+							_prevURL = url.replace(_prevSkin,"{0}");
+						}
+					}
+					else
+					{
+						_prevURL = null;
+						_prevSkin =null;
+					}
+				});
+				loader.contentLoaderInfo.addEventListener(Event.COMPLETE, function():void
+				{
+					mainContainer.changeSkin(_currentInstance, _currentStyleData, url, SkinType.URL_SKIN, loader.content);
+					if(_currentInstance.fullName.match(/Button|UIBitMap|UISprite|UIRectBox/))
+					{
+						mainContainer.changeWH(_currentInstance,loader.content.width,loader.content.height);
+					}
+					if(mainContainer.next())
+					{
+						if(_prevURL == null)
+						{
+							_prevSkin = _currentStyleData.skinName.replace("Skin","");
+							_prevURL = url.replace(_prevSkin,"{0}");
+						}
+					}
+					else
+					{
+						_prevURL = null;
+						_prevSkin =null;
+					}
+				});
+			}
+			
+			private function onAttributeChange(event:UIEvent):void
+			{
+				propertyPanel.updateAttributeFromUI();
+			}
+			
+			private function onMianMovedOverHandler(evt:UIEvent):void
+			{
+				mainX.value = (UIMainContainer.Instance.x / UIMainContainer.Instance.scaleX);
+				mainY.value = (UIMainContainer.Instance.y / UIMainContainer.Instance.scaleY);
+			}
+			
+			
+			private function onMouseMianPosMovedClickHandler(evt:MouseEvent):void
+			{
+				UIMainContainer.Instance.isMoveMainPos = !UIMainContainer.Instance.isMoveMainPos;
+			}
+			
+			private function onMainPosChangeHandler(evt:Event):void
+			{
+				UIMainContainer.Instance.x = mainX.value;
+				UIMainContainer.Instance.y = mainY.value;
+			}
+			
+			private function isShowSelectedFilters(evt:MouseEvent):void
+			{
+				UIMainContainer.Instance.isShowSelectedFilters = !UIMainContainer.Instance.isShowSelectedFilters;
+				
+			}
+			
+			private function onInstanceClickHandler(evt:Event):void
+			{
+				var s:UIInstanceInfo = instanceList.selectedItem as UIInstanceInfo;
+				propertyPanel.setUIInstance(s);
+				mainContainer.setSelectUI(s);
+			}
+			
+			/**
+			 * UI列表有变化
+			 */
+			private function onUpdateInstanceListHandler(evt:MainContainerEvent):void
+			{
+				var list:Dictionary = UIMainContainer.Instance.displayInfoList;
+				var data:Object = null;
+				var uiList:ArrayCollection = new ArrayCollection;
+				for each (data in list)
+				if (data is UIInstanceInfo)
+					uiList.addItem(data);
+				this.instanceList.dataProvider = uiList;
+			}
+			
+			private var _currentCopyData:UIInstanceInfo = null;
+			
+			private function onCopyUIHandler(evt:MainContainerEvent):void
+			{
+				createUIPanel.copyUI = true;
+				_currentCopyData = evt.copyUIData;
+				if(createUIPanel.input)
+				{
+					createUIPanel.input.text = _currentCopyData.instanceName + "Copy";
+				}
+				createUIPanel.setMode(false);
+				PopUpManager.addPopUp(createUIPanel, this, true);
+				PopUpManager.centerPopUp(createUIPanel);
+			}
+			
+			
+			private function onColoChangeHandler(evt:ColorPickerEvent):void
+			{
+				this.colorTxt.text = this.colorpicker.value.toString();
+			}
+			
+			private function setFileConfig(strValue:String, isImport:Boolean = false):void
+			{
+				if (strValue.indexOf("instanceName=\"this\"") != -1 && strValue.indexOf("childRen") != -1 && strValue.indexOf("root") != -1)
+				{
+					var xml:XML = new XML(strValue);
+					if (!isImport)
+						reset();
+					this.editorSence.lblXML.text = xml.toString();
+					ImportConfigs.Instance.setSonfig(xml);
+					PopUpManager.removePopUp(createUIPanel);
+					PopUpManager.removePopUp(this._panelList);
+					undoManager.clearAll();
+				}
+				else
+				{
+					Alert.show("文件不是源文件");
+				}
+			}
+			
+			private function importFileHandler(event:MouseEvent):void
+			{
+				var f:File = new File();
+				f.browse();
+				f.addEventListener(Event.SELECT, function():void
+				{
+					var fs:FileStream = new FileStream;
+					fs.open(f, FileMode.READ);
+					var strValue:String = fs.readUTFBytes(fs.bytesAvailable);
+					fs.close();
+					
+					setFileConfig(strValue, true);
+				});
+			}
+			
+			/**
+			 * 加载
+			 */
+			private function onLoadSaveConfigHandler(evt:MouseEvent):void
+			{
+				var f:File = new File(UIParser.Instance._toolXMLURL);
+				//				f.browse();
+				var arr:Array = f.getDirectoryListing();//File类型
+				var lst:ArrayList = new ArrayList();
+				for each(var file:File in arr)
+				{
+					if(file.isDirectory == false && file.isHidden == false)
+					{
+						var obj:Object = new Object();
+						obj.file = file;
+						obj.label = file.name;
+						lst.addItem(obj);
+					}
+				}
+				if(lst.length > 0)
+				{
+					this._panelList.dataProvider = lst;
+					PopUpManager.addPopUp(this._panelList,this);
+					PopUpManager.centerPopUp(this._panelList);
+					this.stage.focus = _panelList.text;
+					
+				}
+			}
+			
+			private function _panelList_selectedFileHandler(event:Event):void
+			{
+				var fs:FileStream = new FileStream;
+				fs.open(this._panelList.selectedFl, FileMode.READ);
+				var strValue:String = fs.readUTFBytes(fs.bytesAvailable);
+				fs.close();
+				
+				setFileConfig(strValue);
+			}
+			
+			private function changeSizeHandler(data:Object):void
+			{
+				UIMainContainer.Instance.scaleX = data.data;
+				UIMainContainer.Instance.scaleY = data.data;
+			}
+			
+			private function reset():void
+			{
+				UIMainContainer.Instance.clear();
+				UIMainContainer.Instance.undoManager = undoManager;
+				CreateUIModel.Instance.reset();
+				instanceList.dataProvider = null;
+			}
+			
+			private function onSaveFileHandler(evt:MouseEvent):void
+			{
+				updateCode();
+				
+				var childRen:uint = CreateUIModel.Instance.code.childRen.ui.length();
+				
+				if (childRen > 0)
+				{
+					if(BuildCoder.Instance.PackageName != "" && BuildCoder.Instance.PackageName != null)
+					{
+						try
+						{
+							var str:String = BuildCoder.Instance.PackageName;
+							str = UIParser.Instance._sourceXMLURL + str.replace(/\./g,"\/") + "/" + BuildCoder.Instance.ClassName + ".as";
+							var file:File = new File(str);
+							//file.url = 
+							var fileStream:FileStream = new FileStream();
+							fileStream.open(file,FileMode.WRITE);
+							fileStream.writeUTFBytes(BuildCoder.Instance.toString());
+							fileStream.close();
+							
+							onSaveCodeCompleteHandelr(null);
+							return;
+						}
+						catch(e:Error)
+						{
+							
+						}
+					}
+					var f:FileReference = new FileReference();
+					f.save(BuildCoder.Instance.toString(), BuildCoder.Instance.ClassName + ".as");
+					f.addEventListener(Event.COMPLETE, onSaveCodeCompleteHandelr);
+				}
+				else
+				{
+					Alert.show("请先创建或载入配置");
+				}
+			}
+			
+			private function onSaveCodeCompleteHandelr(evt:Event):void
+			{
+				if(evt) FileReference(evt.target).removeEventListener(Event.COMPLETE, onSaveCodeCompleteHandelr);
+				var xml:XML = new XML(CreateUIModel.Instance.code.toString().replace(/\n/gi, ""));
+				
+				var file:File = new File(UIParser.Instance._toolXMLURL + BuildCoder.Instance.ClassName + ".xml");
+				var fs:FileStream = new FileStream();
+				fs.open(file,FileMode.WRITE);
+				fs.writeUTFBytes(xml.toXMLString());
+				fs.close();
+				
+				var configURL:String = UIParser.Instance._configXMLURL + BuildCoder.Instance.ClassName + "_ui_config.xml";
+				file = new File(configURL);
+				fs.open(file,FileMode.WRITE);
+				fs.position = 0;
+				xml = new XML(BuildCoder.Instance.buildConfigXML().replace(/\n/gi, ""));
+				fs.writeUTFBytes(xml.toXMLString());
+				fs.close();
+				
+				Alert.show("相关的XML也保存好了！","恭喜");
+			}
+			
+			
+			private function getUIlist():Array
+			{
+				var tempArray:Array = [];
+				var list:Array = UIModelInfo.Instance.UIList;
+				var i:int = 0;
+				var len:int = list.length;
+				for (i = 0; i < len; i++)
+				{
+					
+					var ui:UIStructural = list[i] as UIStructural;
+					tempArray.push({label: ui.uiName, data: ui});
+				}
+				return tempArray;
+			}
+			
+			private function onShowInputNameClickHandler(event:Event):void
+			{
+				if(this._clkNewPanel)
+				{
+					this.reset();
+					BuildCoder.Instance.ClassName = null;
+					this._clkNewPanel = false;
+				}
+				var data:UIStructural = _currentUIStructural;
+				var inputName:String = createUIPanel.inputName;
+				var packageName:String = "";
+				var className:String = inputName;
+				if(inputName.indexOf(";") != -1)
+				{
+					className = inputName.split(";")[0];
+					if(inputName.split(";")[1])
+						packageName = UIParser.Instance.packagePrefix + "."+inputName.split(";")[1];
+				}
+				var isCopyUIMode:Boolean = createUIPanel.copyUI;
+				
+				if (isCopyUIMode)
+				{
+					UIMainContainer.Instance.copyUI(_currentCopyData, UIMainContainer.Instance.name, inputName);
+					createUIPanel.copyUI = false;
+					PopUpManager.removePopUp(createUIPanel);
+					return;
+				}
+				
+				if (className == BuildCoder.Instance.ClassName)
+				{
+					Alert.show("不能与类名同名");
+				}
+					//创建组件
+				else if (BuildCoder.Instance.ClassName != null)
+				{
+					PopUpManager.removePopUp(createUIPanel);
+					UIMainContainer.Instance.addUI(data, UIMainContainer.Instance.name, className);
+					CreateUIModel.Instance.update();
+				}
+					//创建主界面
+				else
+				{
+					BuildCoder.Instance.ClassName = className;
+					BuildCoder.Instance.PackageName = packageName;
+					BuildCoder.Instance.ClassDesc = UIParser.Instance.classDesc;
+					PopUpManager.removePopUp(createUIPanel);
+					PopUpManager.addPopUp(textStylePanel, this, true);
+					PopUpManager.centerPopUp(textStylePanel);
+					stage.focus = textStylePanel.confirm;
+				}
+			}
+			
+			private var _currentUIStructural:UIStructural = null;
+			
+			private function onDoubleClickHandler(evt:ListEvent):void
+			{
+				if (UIMainContainer.Instance.isMoveMainPos == true)
+				{
+					Alert.show("移动舞台时不能创建对象");
+					return;
+				}
+				
+				if (BuildCoder.Instance.ClassName != null)
+				{
+					var ui:UIStructural = evt.itemRenderer.data.data as UIStructural;
+					createUIPanel.reset(false,ui.instancePrefix);
+					createUIPanel.setMode(false);
+					PopUpManager.addPopUp(createUIPanel, this);
+					PopUpManager.centerPopUp(createUIPanel);
+					_currentUIStructural = ui;
+				}
+				else
+				{
+					Alert.show("必须先设置类名");
+				}
+			}
+			
+			private function onSelectedUIHandler(evt:UIEvent):void
+			{
+				this.currentObject.text = evt.data.instanceName;
+				propertyPanel.setUIInstance(evt.data);
+			}
+			
+			private function updateCode():void
+			{
+				var xml:XML = new XML(CreateUIModel.Instance.code.toString().replace(/\n/gi, ""));
+				BuildCoder.Instance.parseToAScode(xml);
+			}
+			
+			protected function btnNewPanel_clickHandler(event:MouseEvent):void
+			{
+				createUIPanel.setMode(true);
+				this.createUIPanel.reset(true);
+				PopUpManager.addPopUp(createUIPanel, this,true);
+				PopUpManager.centerPopUp(createUIPanel);
+				createUIPanel.x = 10;
+				createUIPanel.y = 47;
+				this.createUIPanel.visible = true;
+				this._clkNewPanel = true;
+				stage.focus = createUIPanel.input;
+				
+			}
+			
+			protected function _panelList_onCloseHandler(event:Event):void
+			{
+				PopUpManager.removePopUp(createUIPanel);
+				PopUpManager.removePopUp(this._panelList);
+			}
+			
+			protected function goUncatch(event:UncaughtErrorEvent):void
+			{
+				trace("发生了一个你异想不到的错误，不过我已经帮你吞下它了，好吧，它的名字是：" + event.error.toString());
+			}
+			
+		]]>
+	</fx:Script>
+	<s:states>
+		<s:State name="start"/>
+		<s:State name="edit"/>
+	</s:states>
+	<s:Group height="33"
+			 x.edit="8"
+			 y.edit="7"
+			 width.edit="100%"
+			 left.start="8"
+			 right.start="8"
+			 top.start="5">
+		<s:layout>
+			<s:HorizontalLayout verticalAlign.start="middle"/>
+		</s:layout>
+		<s:Button label="新建面板" height="26" id="btnNewPanel" click="btnNewPanel_clickHandler(event)"/>
+		<s:Button label="保存项目"
+				  width="79.621216"
+				  height="26"
+				  fontSize="12"
+				  click="onSaveFileHandler(event)" label.start="保存" width.start="50"/>
+		<s:Button label="加载项目"
+				  width="79.621216"
+				  height="26"
+				  fontSize="12"
+				  click="onLoadSaveConfigHandler(event)" label.start="加载" width.start="50"/>
+		<s:Button label="导入"
+				  width="80"
+				  height="26"
+				  fontSize="12"
+				  click="importFileHandler(event)" width.start="50"/>
+		<s:Button label="选中滤镜"
+				  width="102"
+				  height="26"
+				  fontSize="12"
+				  click="isShowSelectedFilters(event)"/>
+		<s:Button fontSize="12"
+				  height="26"
+				  label="移动主容器"
+				  click="onMouseMianPosMovedClickHandler(event)"/>
+		<s:ComboBox id="changeSize"
+					width="91"
+					change="changeSizeHandler(changeSize.selectedItem)"
+					fontSize="12"
+					height.start="26">
+			<s:dataProvider>
+				<s:ArrayCollection>
+					<fx:Object label="100%"
+							   data="1"/>
+					<fx:Object label="200%"
+							   data="2"/>
+					<fx:Object label="300%"
+							   data="3"/>
+					<fx:Object label="400%"
+							   data="4"/>
+					<fx:Object label="500%"
+							   data="5"/>
+					<fx:Object label="50%"
+							   data="0.5"/>
+					<fx:Object label="25%"
+							   data="0.25"/>
+				</s:ArrayCollection>
+			</s:dataProvider>
+		</s:ComboBox>
+		<s:Label color="#FF1515"
+				 fontSize="12"
+				 fontWeight="bold"
+				 text="当前UI名："
+				 height.edit="100%"/>
+		<mx:TextInput id="currentObject"
+					  width="235"
+					  color="#B00000"
+					  editable="false"
+					  enabled="true"
+					  textAlign="center"/>
+		<s:Label verticalAlign="middle"
+				 height="100%"
+				 text="x"/>
+		<s:NumericStepper width="49"
+						  id="mainX"
+						  change="onMainPosChangeHandler(event)"/>
+		<s:Label
+			text="y" x.edit="1026" y.edit="17"/>
+		<s:NumericStepper
+			width="49"
+			id="mainY"
+			change="onMainPosChangeHandler(event)" x.edit="1044.25" y.edit="15"/>
+	</s:Group>
+	
+	<mx:HDividedBox left="10"
+					right="10"
+					top="47"
+					bottom="10"
+					id="hDividedBox">
+		<mx:Canvas width="200"
+				   height="100%">
+			<mx:TabNavigator left="0"
+							 right="0"
+							 top="40"
+							 bottom="0"
+							 borderStyle="none">
+				<mx:Canvas label="组件"
+						   width="100%"
+						   height="100%">
+					<mx:List id="uiList"
+							 width="100%"
+							 height="100%">
+					</mx:List>
+				</mx:Canvas>
+				<local:SetPropertyPanel label="属性"
+										id="propertyPanel"
+										undoManager="{undoManager}" paddingTop.start="20">
+				</local:SetPropertyPanel>
+			</mx:TabNavigator>
+			<mx:ColorPicker id="colorpicker"
+							left="5"
+							change="onColoChangeHandler(event)"
+							top="10"/>
+			<mx:TextInput id="colorTxt"
+						  right="0"
+						  left="35"
+						  top="10"/>
+		</mx:Canvas>
+		
+		<local:EditorSence undoManager="{undoManager}"
+						   id="editorSence"/>
+		<mx:Canvas width="150"
+				   height="100%">
+			<local:UIList id="instanceList"
+						  x="0"
+						  y="0"
+						  width="100%"
+						  height="100%"
+						  change="onInstanceClickHandler(event)">
+			</local:UIList>
+		</mx:Canvas>
+	</mx:HDividedBox>
+</s:WindowedApplication>

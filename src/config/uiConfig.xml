@@ -1,0 +1,546 @@
+﻿<uiConfig>
+	<resourceURL>D:/JJFS/JJFS/resource/default/ui/resource/</resourceURL>
+	<toolXML>D:/JJFS/JJFS/xmlForClient/panelConfigXML/source/</toolXML>
+	<configXML>D:/JJFS/JJFS/xmlForClient/panelConfigXML/</configXML>
+	<sourceXML>D:/JJFS/JJFS/src/</sourceXML>
+	<packagePrefix>com.ultizen.game.jjfs.viewers</packagePrefix>
+	<classDesc>@author chendong</classDesc>
+	<baseClass>com.ultizen.game.jjfs.baseLayOuter.UIBuildBase</baseClass>
+	<dataInterface></dataInterface>
+	<libs>
+		<lib>res/ui/fl.swf</lib>
+		<lib>res/ui/flSkin.swf</lib>
+		<lib>res/ui/SWFUI.swf</lib>
+	</libs>
+	<ui fullName="fl.controls.Button" hasFont="true" instancePrefix="_btn">
+		<Properties>
+			<Propertie name="label" describe="文本内容" type="string" value="按钮" />
+			<Propertie name="width" describe="宽" type="number" value="100" />
+			<Propertie name="height" describe="高" type="number" value="35" />
+			<Propertie name="x" describe="x轴" type="number" value="0" />
+			<Propertie name="y" describe="y轴" type="number" value="0" />
+			<Propertie name="enabled" describe="可用" type="bool" value="true" />
+		</Properties>
+		<Styles>
+			<style skinMethod="setStyle" setObjectName="this" styleName="downSkin|upSkin|overSkin|disabledSkin" type="displayObject" describe="button" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downSkin" type="displayObject" describe="downSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="overSkin" type="displayObject" describe="overSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upSkin" type="displayObject" describe="upSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="selectedUpSkin" type="displayObject" describe="selectedUpSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="selectedDownSkin" type="displayObject" describe="selectedDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="selectedOverSkin" type="displayObject" describe="selectedOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="disabledSkin" type="displayObject" describe="disabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="disabledTextFormat" type="font" describe="disabled字体" />
+		</Styles>
+	</ui>
+	<ui fullName="fl.controls.ComboBox" autoLayOut="false" isContainer="false" singlenChild="false" addFunName="fun|addChild" instancePrefix="_cbox">
+		<Properties>
+			<Propertie name="x" describe="x" type="number" value="0" />
+			<Propertie name="y" describe="y" type="number" value="0" />
+			<Propertie name="width" describe="宽" type="number" value="200" />
+			<Propertie name="height" describe="高" type="number" value="30" />
+		</Properties>
+		<Styles>
+			<style skinMethod="setStyle" setObjectName="this" styleName="upSkin" type="displayObject" describe="upSkin 状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="overSkin" type="displayObject" describe="overSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downSkin" type="displayObject" describe="downSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="listSkin" type="displayObject" describe="listSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowDisabledSkin" type="displayObject" describe="downArrowDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowDownSkin" type="displayObject" describe="downArrowDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowUpSkin" type="displayObject" describe="downArrowUpSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowOverSkin" type="displayObject" describe="downArrowOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbDisabledSkin" type="displayObject" describe="thumbDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbDownSkin" type="displayObject" describe="thumbDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbIcon" type="displayObject" describe="thumbIcon状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbOverSkin" type="displayObject" describe="thumbOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbUpSkin" type="displayObject" describe="thumbUpSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackDisabledSkin" type="displayObject" describe="trackDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackDownSkin" type="displayObject" describe="trackDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackOverSkin" type="displayObject" describe="trackOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackUpSkin" type="displayObject" describe="trackUpSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowDisabledSkin" type="displayObject" describe="upArrowDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowDownSkin" type="displayObject" describe="upArrowDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowOverSkin" type="displayObject" describe="upArrowOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowUpSkin" type="displayObject" describe="upArrowUpSkin状态" />
+		</Styles>
+	</ui>
+	<ui fullName="fl.controls.CheckBox" hasFont="true" instancePrefix="_chk">
+		<Properties>
+			<Propertie name="x" describe="x" type="number" value="0" />
+			<Propertie name="y" describe="y" type="number" value="0" />
+			<Propertie name="width" describe="宽" type="number" value="60" />
+			<Propertie name="height" describe="高" type="number" value="60" />
+			<Propertie name="selected" describe="选种" type="bool" value="true" />
+			<Propertie name="label" describe="文本" type="string" value="框" />
+		</Properties>
+		<Styles>
+			<style skinMethod="setStyle" setObjectName="this" styleName="downIcon" type="displayObject" describe="downIcon状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="icon" type="displayObject" describe="icon状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="overIcon" type="displayObject" describe="overIcon状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="selectedDownIcon" type="displayObject" describe="selectedDownIcon状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="selectedOverIcon" type="displayObject" describe="selectedOverIcon状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="selectedUpIcon" type="displayObject" describe="selectedUpIcon状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upIcon" type="displayObject" describe="upIcon状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="disabledIcon" type="displayObject" describe="disabledIcon状态" />
+		</Styles>
+	</ui>
+	<ui fullName="fl.controls.Label" hasFont="true"  instancePrefix="_lbl">
+		<Properties>
+			<Propertie name="x" describe="x" type="number" value="0" />
+			<Propertie name="y" describe="y" type="number" value="0" />
+			<Propertie name="width" describe="宽" type="number" value="60" />
+			<Propertie name="height" describe="高" type="number" value="20" />
+			<Propertie name="text" describe="文本" type="string" value="Label" />
+			<Propertie name="wordWrap" describe="多行" type="bool" value="false"/>
+		</Properties>
+		<Styles />
+	</ui>
+	<ui fullName="fl.containers.ScrollPane" isContainer="true" autoLayOut="false" singlenChild="true" addFunName="set|source" instancePrefix="_srl">
+		<Properties>
+			<Propertie name="x" describe="x" type="number" value="0" />
+			<Propertie name="y" describe="y" type="number" value="0" />
+			<Propertie name="width" describe="宽" type="number" value="60" />
+			<Propertie name="height" describe="高" type="number" value="60" />
+		</Properties>
+		<Styles>
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowDisabledSkin" type="class" describe="downArrowDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowDownSkin" type="class" describe="downArrowDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowUpSkin" type="class" describe="downArrowUpSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowOverSkin" type="class" describe="downArrowOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbDisabledSkin" type="class" describe="thumbDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbDownSkin" type="class" describe="thumbDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbIcon" type="class" describe="thumbIcon状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbOverSkin" type="class" describe="thumbOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbUpSkin" type="class" describe="thumbUpSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackDisabledSkin" type="class" describe="trackDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackDownSkin" type="class" describe="trackDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackOverSkin" type="class" describe="trackOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackUpSkin" type="class" describe="trackUpSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowDisabledSkin" type="class" describe="upArrowDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowDownSkin" type="class" describe="upArrowDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowOverSkin" type="class" describe="upArrowOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowUpSkin" type="class" describe="upArrowUpSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upSkin" type="class" describe="upSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="disabledSkin" type="class" describe="disabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="skin" type="class" describe="skin状态" />
+		</Styles>
+	</ui>
+	<ui fullName="fl.controls.TextArea" hasFont="true" instancePrefix="_txtr">
+		<Properties>
+			<Propertie name="x" describe="x" type="number" value="0" />
+			<Propertie name="y" describe="y" type="number" value="0" />
+			<Propertie name="width" describe="宽" type="number" value="60" />
+			<Propertie name="height" describe="高" type="number" value="60" />
+			<Propertie name="text" describe="内容" type="string" value="" />
+		</Properties>
+		<Styles>
+			<style skinMethod="setStyle" setObjectName="this" styleName="focusRectSkin" type="displayObject" describe="focusRectSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upSkin" type="displayObject" describe="upSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="disabledSkin" type="displayObject" describe="disabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowDisabledSkin" type="class" describe="downArrowDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowDownSkin" type="class" describe="downArrowDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowUpSkin" type="class" describe="downArrowUpSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowOverSkin" type="class" describe="downArrowOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbDisabledSkin" type="class" describe="thumbDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbDownSkin" type="class" describe="thumbDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbIcon" type="class" describe="thumbIcon状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbOverSkin" type="class" describe="thumbOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbUpSkin" type="class" describe="thumbUpSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackDisabledSkin" type="class" describe="trackDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackDownSkin" type="class" describe="trackDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackOverSkin" type="class" describe="trackOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackUpSkin" type="class" describe="trackUpSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowDisabledSkin" type="class" describe="upArrowDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowDownSkin" type="class" describe="upArrowDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowOverSkin" type="class" describe="upArrowOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowUpSkin" type="class" describe="upArrowUpSkin状态" />
+		</Styles>
+	</ui>
+	<ui fullName="fl.controls.TextInput" hasFont="true" instancePrefix="_inpt">
+		<Properties>
+			<Propertie name="x" describe="x" type="number" value="0" />
+			<Propertie name="y" describe="y" type="number" value="0" />
+			<Propertie name="width" describe="宽" type="number" value="200" />
+			<Propertie name="height" describe="高" type="number" value="60" />
+		</Properties>
+		<Styles>
+			<style skinMethod="setStyle" setObjectName="this" styleName="upSkin" type="displayObject" describe="upSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="disabledSkin" type="displayObject" describe="disabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="focusRectSkin" type="displayObject" describe="focusRectSkin状态" />
+		</Styles>
+	</ui>
+	<ui fullName="fl.controls.RadioButton" hasFont="true" autoLayOut="false" instancePrefix="_rbtn">
+		<Properties>
+			<Propertie name="label" describe="文本" type="string" value="框" />
+			<Propertie name="x" describe="x" type="number" value="0" />
+			<Propertie name="y" describe="y" type="number" value="0" />
+			<Propertie name="width" describe="宽" type="number" value="60" />
+			<Propertie name="height" describe="高" type="number" value="60" />
+		</Properties>
+		<Styles>
+			<style skinMethod="setStyle" setObjectName="this" styleName="downIcon" type="displayObject" describe="downIcon状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="icon" type="displayObject" describe="icon状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="overIcon" type="displayObject" describe="overIcon状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="selectedDownIcon" type="displayObject" describe="selectedDownIcon状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="selectedOverIcon" type="displayObject" describe="selectedOverIcon状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="selectedUpIcon" type="displayObject" describe="selectedUpIcon状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upIcon" type="displayObject" describe="upIcon状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="disabledIcon" type="displayObject" describe="disabledIcon状态" />
+		</Styles>
+	</ui>
+		<ui fullName="fl.controls.ProgressBar" autoLayOut="false" isContainer="false" hasFont="true" instancePrefix="_pgbar">
+		<Properties>
+			<Propertie name="x" describe="x" type="number" value="0" />
+			<Propertie name="y" describe="y" type="number" value="0" />
+			<Propertie name="width" describe="宽" type="number" value="80" />
+			<Propertie name="height" describe="高" type="number" value="20" />
+			<Propertie name="value" describe="当前" type="number" value="5" />
+			<Propertie name="maximum" describe="最大" type="number" value="50" />
+			<Propertie name="minimum" describe="最小" type="number" value="0" />
+			<Propertie name="mode" describe="模式" type="string" value="manual" />
+		</Properties>
+		<Styles>
+			<style skinMethod="setStyle" setObjectName="this" styleName="barSkin" type="displayObject" describe="barSkin皮肤" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackSkin" type="displayObject" describe="trackSkin皮肤" />
+		</Styles>
+	</ui>
+	<ui fullName="fl.controls.UIScrollBar" hasFont="false" instancePrefix="_uisrlbar">
+		<Properties>
+			<Propertie name="x" describe="x" type="number" value="0" />
+			<Propertie name="y" describe="y" type="number" value="0" />
+			<Propertie name="arrowHeight" describe="箭头的高" type="number" value="19"></Propertie>
+			<Propertie name="width" describe="宽" type="number" value="19" />
+			<Propertie name="height" describe="高" type="number" value="100" />
+			<Propertie name="enabled" describe="高" type="bool" value="true" />
+			<Propertie name="minScrollPosition" describe="minScrollPosition" type="number" value="0" />
+			<Propertie name="maxScrollPosition" describe="maxScrollPosition" type="number" value="100" />
+		</Properties>
+		<Styles>
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowDisabledSkin" type="class" describe="downArrowDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowDownSkin" type="class" describe="downArrowDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowUpSkin" type="class" describe="downArrowUpSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowOverSkin" type="class" describe="downArrowOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbDisabledSkin" type="class" describe="thumbDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbDownSkin" type="class" describe="thumbDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbIcon" type="class" describe="thumbIcon状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbOverSkin" type="class" describe="thumbOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbUpSkin" type="class" describe="thumbUpSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackDisabledSkin" type="class" describe="trackDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackDownSkin" type="class" describe="trackDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackOverSkin" type="class" describe="trackOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackUpSkin" type="class" describe="trackUpSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowDisabledSkin" type="class" describe="upArrowDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowDownSkin" type="class" describe="upArrowDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowOverSkin" type="class" describe="upArrowOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowUpSkin" type="class" describe="upArrowUpSkin状态" />
+		</Styles>
+	</ui>
+	<ui fullName="fl.controls.DataGrid" hasFont="true" instancePrefix="_dg">
+		<Properties>
+			<Propertie name="x" describe="x" type="number" value="0" />
+			<Propertie name="y" describe="y" type="number" value="0" />
+			<Propertie name="width" describe="宽" type="number" value="60" />
+			<Propertie name="height" describe="高" type="number" value="60" />
+		</Properties>
+		<Styles>
+			<style skinMethod="setStyle" setObjectName="this" styleName="downIcon" type="displayObject" describe="downIcon状态" />
+		</Styles>
+	</ui>
+	<ui fullName="fl.controls.Slider" hasFont="true" instancePrefix="_slider">
+		<Properties>
+			<Propertie name="x" describe="x" type="number" value="0" />
+			<Propertie name="y" describe="y" type="number" value="0" />
+			<Propertie name="width" describe="宽" type="number" value="60" />
+			<Propertie name="height" describe="高" type="number" value="60" />
+		</Properties>
+		<Styles>
+			<style skinMethod="setStyle" setObjectName="this" styleName="sliderTrackDisabledSkin" type="displayObject" describe="sliderTrackDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="sliderTrackSkin" type="displayObject" describe="sliderTrackSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbDisabledSkin" type="displayObject" describe="thumbDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbDownSkin" type="displayObject" describe="thumbDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbOverSkin" type="displayObject" describe="thumbOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbUpSkin" type="displayObject" describe="thumbUpSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="tickSkin" type="displayObject" describe="tickSkin状态" />
+		</Styles>
+	</ui>
+	<ui fullName="UISprite" autoLayOut="false" isContainer="false" singlenChild="false" addFunName="fun|addChild" instancePrefix="_uisp">
+		<Properties>
+			<Propertie name="x" describe="x" type="number" value="0" />
+			<Propertie name="y" describe="y" type="number" value="0" />
+			<Propertie name="width" describe="宽" type="number" value="50" />
+			<Propertie name="height" describe="高" type="number" value="50" />
+			<Propertie name="contentWidth" describe="UI宽" type="number" value="-1" />
+			<Propertie name="contentHeight" describe="UI高" type="number" value="-1" />
+			<Propertie name="scaleX" describe="scaleX" type="number" value="1" />
+			<Propertie name="scaleY" describe="scaleY" type="number" value="1" />
+		</Properties>
+		<Styles>
+			<style skinMethod="setStyle" setObjectName="this" styleName="backgroundSkin" type="displayObject" describe="背景" />
+		</Styles>
+	</ui>
+	<ui fullName="UIRectBox" autoLayOut="true" isContainer="true" singlenChild="false" addFunName="fun|addChild" instancePrefix="_rbox">
+		<Properties>
+			<Propertie name="x" describe="x" type="number" value="0" />
+			<Propertie name="y" describe="y" type="number" value="0" />
+			<Propertie name="width" describe="宽" type="number" value="60" />
+			<Propertie name="height" describe="高" type="number" value="60" />
+			<Propertie name="amount" describe="amount" type="uint" value="2" />
+			<Propertie name="widthSpace" describe="widthSpace" type="number" value="5" />
+			<Propertie name="heightSpace" describe="heightSpace" type="number" value="5" />
+		</Properties>
+		<Styles>
+			<style skinMethod="setStyle" setObjectName="this" styleName="backgroundSkin" type="displayObject" describe="背景皮肤" />
+		</Styles>
+	</ui>
+	<ui fullName="CommonContainer" autoLayOut="false" isContainer="true" singlenChild="false" addFunName="fun|addChild" instancePrefix="_ccont">
+		<Properties>
+			<Propertie name="x" describe="x" type="number" value="0" />
+			<Propertie name="y" describe="y" type="number" value="0" />
+			<Propertie name="width" describe="宽" type="number" value="60" />
+			<Propertie name="height" describe="高" type="number" value="60" />
+		</Properties>
+		<Styles>
+			<style skinMethod="setStyle" setObjectName="this" styleName="backgroundSkin" type="displayObject" describe="背景皮肤" />
+		</Styles>
+	</ui>
+	<ui fullName="UITextField" autoLayOut="false" isContainer="false" hasFont="true" instancePrefix="_txt">
+		<Properties>
+			<Propertie name="mouseEvnetDisable" describe="是否接受鼠标响应" type="bool" value="true" />
+			<Propertie name="text" describe="内容" type="string" value="自定义标签" />
+			<Propertie name="x" describe="x" type="number" value="0" />
+			<Propertie name="y" describe="y" type="number" value="0" />
+			<Propertie name="width" describe="宽" type="number" value="80" />
+			<Propertie name="height" describe="高" type="number" value="20" />
+			<Propertie name="hasfilter" describe="是否滤镜" type="bool" value="false" />
+			<Propertie name="selectedTab" describe="是否可选" type="bool" value="false" />
+			<Propertie name="filterColor" describe="滤镜颜色" type="uint" value="0x00000" />
+			<Propertie name="multiline" describe="多行" type="bool" value="false" />
+			<Propertie name="wordWrap" describe="自动换行" type="bool" value="false" />
+			<Propertie name="filtersOtherAtt" describe="滤镜[alpha,blurX,blurY,strength,quality,inner,knockout]" type="string" value="1,2,2,3,3,false,false" />
+		</Properties>
+		<Styles>
+			<style skinMethod="setStyle" setObjectName="this" styleName="backgroundSkin" type="displayObject" describe="背景皮肤" />
+		</Styles>
+	</ui>
+	<ui fullName="UIComboBox" hasFont="true" instancePrefix="_uicbox">
+		<Properties>
+			<Propertie name="x" describe="x" type="number" value="0" />
+			<Propertie name="y" describe="y" type="number" value="0" />
+			<Propertie name="width" describe="宽" type="number" value="100" />
+			<Propertie name="height" describe="高" type="number" value="28" />
+			<Propertie name="data" describe="标签内容 | 分割 " type="string" value="标签1|标签2|标签3" />
+			<Propertie name="rowHeight" describe="row高" type="number" value="28" />
+			<Propertie name="rowWidth" describe="row宽" type="number" value="100" />
+		</Properties>
+		<Styles>
+			<style skinMethod="setStyle" setObjectName="this" styleName="upSkin" type="class" describe="upSkin" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="overSkin" type="class" describe="overSkin" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downSkin" type="class" describe="downSkin" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="disabledSkin" type="class" describe="disabledSkin" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="RendererStyledownSkin" type="class" describe="下拉downSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="RendererStyleoverSkin" type="class" describe="下拉overSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="RendererStyleupSkin" type="class" describe="下拉upSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="RendererStyledisabledSkin" type="class" describe="下拉disabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="RendererStyleselectedDownSkin" type="class" describe="下拉选中downSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="RendererStyleselectedOverSkin" type="class" describe="下拉选中overSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="RendererStyleselectedUpSkin" type="class" describe="下拉选中upSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="RendererStyleselecteddisabledSkin" type="class" describe="下拉选中disabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowDisabledSkin" type="class" describe="downArrowDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowDownSkin" type="class" describe="downArrowDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowUpSkin" type="class" describe="downArrowUpSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowOverSkin" type="class" describe="downArrowOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbDisabledSkin" type="class" describe="thumbDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbDownSkin" type="class" describe="thumbDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbIcon" type="class" describe="thumbIcon状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbOverSkin" type="class" describe="thumbOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbUpSkin" type="class" describe="thumbUpSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackDisabledSkin" type="class" describe="trackDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackDownSkin" type="class" describe="trackDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackOverSkin" type="class" describe="trackOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackUpSkin" type="class" describe="trackUpSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowDisabledSkin" type="class" describe="upArrowDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowDownSkin" type="class" describe="upArrowDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowOverSkin" type="class" describe="upArrowOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowUpSkin" type="class" describe="upArrowUpSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="DropdownStyleskin" type="class" describe="ListSkin状态" />
+		</Styles>
+	</ui>
+	<ui fullName="UIList" hasFont="true" instancePrefix="_uilst">
+		<Properties>
+			<Propertie name="x" describe="x" type="number" value="0" />
+			<Propertie name="y" describe="y" type="number" value="0" />
+			<Propertie name="width" describe="宽" type="number" value="100" />
+			<Propertie name="height" describe="高" type="number" value="28" /><!-- 
+			<Propertie name="data" describe="标签内容 | 分割 " type="string" value="标签1|标签2|标签3" />
+			<Propertie name="rowCount" value="1" type="number" describe="row数" />
+			<Propertie name="rowHeight" value="70" type="number" describe="row高" /> -->
+		</Properties>
+		<Styles>
+			<style skinMethod="setStyle" setObjectName="this" styleName="skin" type="class" describe="skin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="RendererStyledownSkin" type="class" describe="downSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="RendererStyleoverSkin" type="class" describe="overSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="RendererStyleupSkin" type="class" describe="upSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="RendererStyledisabledSkin" type="class" describe="disabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="RendererStyleselectedDownSkin" type="class" describe="选中downSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="RendererStyleselectedOverSkin" type="class" describe="选中overSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="RendererStyleselectedUpSkin" type="class" describe="选中upSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="RendererStyleselecteddisabledSkin" type="class" describe="选中disabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowDisabledSkin" type="class" describe="downArrowDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowDownSkin" type="class" describe="downArrowDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowUpSkin" type="class" describe="downArrowUpSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowOverSkin" type="class" describe="downArrowOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbDisabledSkin" type="class" describe="thumbDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbDownSkin" type="class" describe="thumbDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbIcon" type="class" describe="thumbIcon状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbOverSkin" type="class" describe="thumbOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbUpSkin" type="class" describe="thumbUpSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackDisabledSkin" type="class" describe="trackDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackDownSkin" type="class" describe="trackDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackOverSkin" type="class" describe="trackOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackUpSkin" type="class" describe="trackUpSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowDisabledSkin" type="class" describe="upArrowDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowDownSkin" type="class" describe="upArrowDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowOverSkin" type="class" describe="upArrowOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowUpSkin" type="class" describe="upArrowUpSkin状态" />
+		</Styles>
+	</ui>
+	<ui fullName="UISlider" isContainer="true" autoLayOut="false" instancePrefix="_sli">
+		<Properties>
+			<Propertie name="x" describe="x" type="number" value="0" />
+			<Propertie name="y" describe="y" type="number" value="0" />
+			<Propertie name="maximum" describe="maximum" type="number" value="100" />
+			<Propertie name="minimum" describe="minimum" type="number" value="0" />
+			<Propertie name="thumbY" describe="滑块偏移量" type="number" value="0" />
+			<Propertie name="thumbSize" describe="滑块的高和宽" type="string" value="13,13" />
+			<Propertie name="trackSize" describe="轨道宽和高" type="string" value="60,10" />
+			<Propertie name="tickInterval" describe="tickInterval" type="int" value="0" />
+			<Propertie name="snapInterval" describe="snapInterval" type="int" value="0" />
+			<Propertie name="isVertical" describe="是否垂直" type="bool" value="false" />
+		</Properties>
+		<Styles>
+			<style skinMethod="setStyle" setObjectName="this" styleName="sliderTrackDisabledSkin" type="displayObject" describe="sliderTrackDisabledSkin皮肤" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="sliderTrackSkin" type="displayObject" describe="sliderTrackSkin皮肤" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbDisabledSkin" type="displayObject" describe="thumbDisabledSkin皮肤" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbDownSkin" type="displayObject" describe="thumbDownSkin皮肤" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbUpSkin" type="displayObject" describe="thumbUpSkin皮肤" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbOverSkin" type="displayObject" describe="thumbOverSkin皮肤" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="tickSkin" type="displayObject" describe="tickSkin皮肤" />
+		</Styles>
+	</ui>
+	<ui fullName="UITextArea" hasFont="true" instancePrefix="_uitxtr">
+		<Properties>
+			<Propertie name="x" describe="x" type="number" value="0" />
+			<Propertie name="y" describe="y" type="number" value="0" />
+			<Propertie name="width" describe="宽" type="number" value="60" />
+			<Propertie name="height" describe="高" type="number" value="60" />
+			<Propertie name="text" describe="内容" type="string" value="" />
+		</Properties>
+		<Styles>
+			<style skinMethod="setStyle" setObjectName="this" styleName="focusRectSkin" type="displayObject" describe="focusRectSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upSkin" type="displayObject" describe="upSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="disabledSkin" type="displayObject" describe="disabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="UIBarSkindownArrowUpSkin" type="displayObject" describe="disabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowDisabledSkin" type="class" describe="downArrowDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowDownSkin" type="class" describe="downArrowDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowUpSkin" type="class" describe="downArrowUpSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowOverSkin" type="class" describe="downArrowOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbDisabledSkin" type="class" describe="thumbDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbDownSkin" type="class" describe="thumbDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbIcon" type="class" describe="thumbIcon状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbOverSkin" type="class" describe="thumbOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbUpSkin" type="class" describe="thumbUpSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackDisabledSkin" type="class" describe="trackDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackDownSkin" type="class" describe="trackDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackOverSkin" type="class" describe="trackOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackUpSkin" type="class" describe="trackUpSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowDisabledSkin" type="class" describe="upArrowDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowDownSkin" type="class" describe="upArrowDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowOverSkin" type="class" describe="upArrowOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowUpSkin" type="class" describe="upArrowUpSkin状态" />
+		</Styles>
+	</ui>
+	<ui fullName="UIBitMap" hasFont="false" instancePrefix="_uibmp">
+		<Properties>
+			<Propertie name="x" describe="x" type="number" value="0" />
+			<Propertie name="y" describe="y" type="number" value="0" />
+			<Propertie name="width" describe="宽" type="number" value="-1" />
+			<Propertie name="height" describe="高" type="number" value="-1" />
+			
+			<Propertie name="uiScale9Grid" describe="uiScale9Grid" type="string" value="0,0" />
+			<Propertie name="showing9GridDemo" describe="showing9GridDemo" type="bool" value="true" />
+		</Properties>
+		<Styles>
+			<style skinMethod="setStyle" setObjectName="this" styleName="styleBitMap" type="displayObject" describe="styleBitMap状态" />
+		</Styles>
+	</ui>
+	<ui fullName="UIRadioButton" hasFont="true" instancePrefix="_uirbtn">
+		<Properties>
+			<Propertie name="label" describe="文本" type="string" value="框" />
+			<Propertie name="x" describe="x" type="number" value="0" />
+			<Propertie name="y" describe="y" type="number" value="0" />
+			<Propertie name="width" describe="宽" type="number" value="60" />
+			<Propertie name="height" describe="高" type="number" value="60" />
+		</Properties>
+		<Styles>
+			<style skinMethod="setStyle" setObjectName="this" styleName="downIcon" type="displayObject" describe="downIcon状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="icon" type="displayObject" describe="icon状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="overIcon" type="displayObject" describe="overIcon状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="selectedDownIcon" type="displayObject" describe="selectedDownIcon状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="selectedOverIcon" type="displayObject" describe="selectedOverIcon状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="selectedUpIcon" type="displayObject" describe="selectedUpIcon状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upIcon" type="displayObject" describe="upIcon状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="disabledIcon" type="displayObject" describe="disabledIcon状态" />
+		</Styles>
+	</ui>
+	<ui fullName="UIEasyScrollBar" hasFont="false" instancePrefix="_uisrl">
+		<Properties>
+			<Propertie name="x" describe="x" type="number" value="0" />
+			<Propertie name="y" describe="y" type="number" value="0" />
+			<Propertie name="arrowHeight" describe="箭头的高" type="number" value="19"></Propertie>
+			<Propertie name="width" describe="宽" type="number" value="19" />
+			<Propertie name="height" describe="高" type="number" value="100" />
+			<Propertie name="enabled" describe="高" type="bool" value="true" />
+			<Propertie name="minScrollPosition" describe="minScrollPosition" type="number" value="0" />
+			<Propertie name="maxScrollPosition" describe="maxScrollPosition" type="number" value="100" />
+		</Properties>
+		<Styles>
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowDisabledSkin" type="class" describe="downArrowDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowDownSkin" type="class" describe="downArrowDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowUpSkin" type="class" describe="downArrowUpSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="downArrowOverSkin" type="class" describe="downArrowOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbDisabledSkin" type="class" describe="thumbDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbDownSkin" type="class" describe="thumbDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbIcon" type="class" describe="thumbIcon状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbOverSkin" type="class" describe="thumbOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="thumbUpSkin" type="class" describe="thumbUpSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackDisabledSkin" type="class" describe="trackDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackDownSkin" type="class" describe="trackDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackOverSkin" type="class" describe="trackOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="trackUpSkin" type="class" describe="trackUpSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowDisabledSkin" type="class" describe="upArrowDisabledSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowDownSkin" type="class" describe="upArrowDownSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowOverSkin" type="class" describe="upArrowOverSkin状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="upArrowUpSkin" type="class" describe="upArrowUpSkin状态" />
+		</Styles>
+	</ui>
+	<ui fullName="UISimpleButton" hasFont="true" instancePrefix="_sbtn">
+		<Properties>
+			<Propertie name="x" describe="x" type="number" value="0" />
+			<Propertie name="y" describe="y" type="number" value="0" />
+			<Propertie name="upStateX" describe="upStateX" type="number" value="0" />
+			<Propertie name="upStateY" describe="upStateY" type="number" value="0" />
+			<Propertie name="overStateX" describe="overStateX" type="number" value="0" />
+			<Propertie name="overStateY" describe="overStateY" type="number" value="0" />
+			<Propertie name="downStateX" describe="downStateX" type="number" value="0" />
+			<Propertie name="downStateY" describe="downStateY" type="number" value="0" />
+			<Propertie name="scaleX" describe="scaleX" type="number" value="1" />
+			<Propertie name="scaleY" describe="scaleY" type="number" value="1" />
+			<Propertie name="text" describe="文本" type="string" value="" />
+		</Properties>
+		<Styles>
+			<style skinMethod="setStyle" setObjectName="this" styleName="over_state_display" type="displayObject" describe="over_state_display状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="down_state_display" type="displayObject" describe="down_state_display状态" />
+			<style skinMethod="setStyle" setObjectName="this" styleName="up_state_display" type="displayObject" describe="up_state_display状态" />
+		</Styles>
+	</ui>
+</uiConfig>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="840"
+		 height="600"
+		 title="SWF皮肤库"
+		 implements="mx.core.IFactory">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+		<s:DataGroup id="container"
+					 dataProvider="{dataList}"
+					 itemRenderer="{this}"
+					 width="820"
+					 height="560">
+			<s:layout>
+				<s:TileLayout />
+			</s:layout>
+		</s:DataGroup>
+	</fx:Declarations>
+	<fx:Metadata>
+		[Event(name="select", type="flash.events.Event")]
+	</fx:Metadata>
+	<s:Scroller viewport="{container}" />
+	
+	<fx:Script>
+		<![CDATA[
+			import com.models.SkinModel;
+			import com.structurals.SkinStructural;
+			
+			import mx.collections.ArrayList;
+			import mx.collections.IList;
+			
+			public var skinDomain:ApplicationDomain;
+			
+			[Bindable]
+			private var dataList:IList;
+			[Bindable]
+			public var skinData:SkinStructural;
+
+			public function newInstance():*
+			{
+				var cell:SkinCellRenderer = new SkinCellRenderer;
+				cell.addEventListener(Event.SELECT, onSelect);
+				return cell;
+			}
+
+			private function onSelect(event:Event):void
+			{
+				var cell:SkinCellRenderer = event.currentTarget as SkinCellRenderer;
+				skinData = cell.data as SkinStructural;
+				dispatchEvent(event);
+			}
+
+
+			public function set model(m:SkinModel):void
+			{
+				var i:int = 0
+				var len:int = m.skinList.length;
+				var data:SkinStructural = null;
+				var list:ArrayList = new ArrayList;
+				for (i = 0; i < len; i++) {
+					data = m.skinList[i];
+					data.skinDomain = skinDomain;
+					list.addItem(data);
+				}
+				this.dataList = list;
+			}
+		]]>
+	</fx:Script>
+</s:TitleWindow>

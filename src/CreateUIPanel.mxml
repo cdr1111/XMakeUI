@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="400"
+		 height="220"
+		 fontSize="12" defaultButton="{ok}">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Metadata>
+		[Event(name="inputOk", type="flash.events.Event")]
+	</fx:Metadata>
+	<fx:Script>
+		<![CDATA[
+			import com.structurals.UIStructural;
+			
+			import mx.controls.Alert;
+			import mx.managers.PopUpManager;
+			
+			public var main:XMakeUI;
+			public var copyUI:Boolean;
+			[Bindable]
+			private var content:String;
+			[Bindable]
+			private var isCreatePanel:Boolean = true;
+			[Bindable]
+			private var _initClassName:String;
+			
+			protected function onOkHandle(event:MouseEvent):void
+			{
+				var value:String = input.text;
+				if (value == "")
+					Alert.show("类名不能为空", "错误");
+				else
+					dispatchEvent(new Event("inputOk"));
+			}
+			
+			public function get inputName():String
+			{
+				return input.text;
+			}
+			
+			public function reset(isPanel:Boolean,prefix:String = null):void
+			{
+				if(input == null) return;
+				input.text = "";
+				if(isPanel == false)
+					input.text = prefix;
+			}
+			
+			public function setMode(isPanel:Boolean):void
+			{
+				isCreatePanel = isPanel;
+				if (isPanel) {
+					_initClassName = "PnlUI;";
+					title = "创建面板，你也可以去加载已存在的面板"
+					content = "设置类名，分号加上你的package，首字母将自动转为大写.(说明:UI默认为锁定状态，锁定状态是不允许改变位置和删除，容器位置的改变.DELETE键为删除UI)";
+				} else {
+					title = "创建新UI";
+					content = "设置对象实例名. (说明:从F1-F5为快捷键F1=解/锁，F2=设置字体，F3&F4=改变显示列表索引, F5是菜单.)";
+				}
+				this.isPopUp = true;
+			}
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center"
+						  paddingTop="10"/>
+	</s:layout>
+	<s:Label width="350"
+			 height="83"
+			 fontSize="12"
+			 text="{content}"/>
+	<s:TextInput id="input" width="350" restrict="[a-zA-Z\0-9;.]" text="{this._initClassName}"/>
+	<s:Group width="350">
+		<s:layout>
+			<s:HorizontalLayout/>
+		</s:layout>
+		<s:Button id="ok"
+				  label="确定"
+				  fontFamily="宋休"
+				  fontSize="12"
+				  click="onOkHandle(event)"/>
+		<s:Button id="cancel"
+				  label="取消"
+				  fontFamily="宋休"
+				  fontSize="12"
+				  click="PopUpManager.removePopUp(this)"/>
+	</s:Group>
+</s:Panel>
